@@ -1,5 +1,5 @@
 // Tutaj dodacie zmienne globalne do przechowywania elementów takich jak np. lista czy input do wpisywania nowego todo
-let $list, $modal, $buttonForm;
+let $list, $modal, $buttonForm; $buttonCancel; $buttonOk; $addedInput;
 const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 
 function main() {
@@ -13,11 +13,21 @@ function prepareDOMElements() {
   $list = document.getElementById('list');
   $modal = document.querySelector('#modal');
   $buttonForm = document.querySelector('addTodo');
+  $buttonCancel = document.querySelector('btn__cancel');
+  $buttonOk = document.querySelector('btn__done');
+  $addedInput = document.querySelector('popupInput');
 }
 
 function prepareDOMEvents() {
-  $addTodo.addEventListener('click', function () {
+  $buttonForm.addEventListener('click', function () {
     $modal.classList.toggle('modal--show');
+  });
+  $buttonCancel.addEventListener('click', function () {
+    $modal.classList.remove('modal--show');
+  });
+  $buttonOk.addEventListener('click', function () {
+    $list.querySelector('li').innerHTML = $addedInput.value;
+    $modal.classList.remove('modal--show');
   });
 }
 
