@@ -38,6 +38,9 @@ function prepareDOMEvents() {
   if($addedInput.value.trim() !== '') {
   $list.querySelector('li').innerHTML = $addedInput.value;
   $modal.classList.remove('modal--show');
+  } else {
+    $addedInput.style.color = 'red';
+  }
  });
 }
 
