@@ -29,6 +29,13 @@ function prepareDOMEvents() {
     $list.querySelector('li').innerHTML = $addedInput.value;
     $modal.classList.remove('modal--show');
   });
+  $addedInput.addEventListener('keyup', function (e) {
+    if (e.keyCode === 13) {
+      $list.querySelector('li').innerHTML = $addedInput.value;
+      $modal.classList.remove('modal--show');
+    }
+  });
+ 
 }
 
 function prepareDOMEvents() {
