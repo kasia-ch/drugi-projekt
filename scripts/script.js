@@ -35,6 +35,7 @@ function prepareDOMEvents() {
   //});
  $form.addEventListener('submit', function(e) {
   e.preventDefault();
+  if($addedInput.value.trim() !== '') {
   $list.querySelector('li').innerHTML = $addedInput.value;
   $modal.classList.remove('modal--show');
  });
