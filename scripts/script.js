@@ -1,5 +1,5 @@
 // Tutaj dodacie zmienne globalne do przechowywania elementów takich jak np. lista czy input do wpisywania nowego todo
-let $list, $modal, $buttonForm; $buttonCancel; $buttonOk; $addedInput;
+let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form;
 const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 
 function main() {
@@ -16,6 +16,7 @@ function prepareDOMElements() {
   $buttonCancel = document.querySelector('btn__cancel');
   $buttonOk = document.querySelector('btn__done');
   $addedInput = document.querySelector('popupInput');
+  $form = document.querySelector('form');
 }
 
 function prepareDOMEvents() {
@@ -25,17 +26,18 @@ function prepareDOMEvents() {
   $buttonCancel.addEventListener('click', function () {
     $modal.classList.remove('modal--show');
   });
-  $buttonOk.addEventListener('click', function () {
-    $list.querySelector('li').innerHTML = $addedInput.value;
-    $modal.classList.remove('modal--show');
-  });
-  $addedInput.addEventListener('keyup', function (e) {
-    if (e.keyCode === 13) {
-      $list.querySelector('li').innerHTML = $addedInput.value;
-      $modal.classList.remove('modal--show');
-    }
-  });
  
+  //$addedInput.addEventListener('keyup', function (e) {
+    //if (e.keyCode === 13) {
+      //$list.querySelector('li').innerHTML = $addedInput.value;
+      //$modal.classList.remove('modal--show');
+    //}
+  //});
+ $form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  $list.querySelector('li').innerHTML = $addedInput.value;
+  $modal.classList.remove('modal--show');
+ });
 }
 
 function prepareDOMEvents() {
