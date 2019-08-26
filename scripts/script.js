@@ -19,10 +19,14 @@ function prepareDOMElements() {
   $form = document.querySelector('form');
 }
 
-function prepareDOMEvents() {
+function prepareDOMEvents()
+  // Przygotowanie listenerów
+  $list.addEventListener('click', listClickManager);
+  
   $buttonForm.addEventListener('click', function () {
     $modal.classList.toggle('modal--show');
   });
+  
   $buttonCancel.addEventListener('click', function () {
     $modal.classList.remove('modal--show');
   });
@@ -33,7 +37,8 @@ function prepareDOMEvents() {
       //$modal.classList.remove('modal--show');
     //}
   //});
- $form.addEventListener('submit', function(e) {
+ 
+  $form.addEventListener('submit', function(e) {
   e.preventDefault();
   if($addedInput.value.trim() !== '') {
   $list.querySelector('li').innerHTML = $addedInput.value;
@@ -44,10 +49,6 @@ function prepareDOMEvents() {
  });
 }
 
-function prepareDOMEvents() {
-  // Przygotowanie listenerów
-  $list.addEventListener('click', listClickManager);
-}
 
 function prepareInitialList() {
   // Tutaj utworzymy sobie początkowe todosy. Mogą pochodzić np. z tablicy
