@@ -12,10 +12,10 @@ function prepareDOMElements() {
   // To będzie idealne miejsce do pobrania naszych elementów z drzewa DOM i zapisanie ich w zmiennych
   $list = document.getElementById('list');
   $modal = document.querySelector('#modal');
-  $buttonForm = document.querySelector('addTodo');
-  $buttonCancel = document.querySelector('btn__cancel');
-  $buttonOk = document.querySelector('btn__done');
-  $addedInput = document.querySelector('popupInput');
+  $buttonForm = document.querySelector('#addTodo');
+  $buttonCancel = document.querySelector('#btn__cancel');
+  $buttonOk = document.querySelector('#btn__done');
+  $addedInput = document.querySelector('#popupInput');
   $form = document.querySelector('form');
 }
 
