@@ -33,6 +33,11 @@ body {
     padding: 0;
   }
 
+  li {
+    padding: 2%;
+    border-bottom: 1px solid rgba(144, 144, 146, 0.418);
+  }
+
   
   
   /* The Modal (background) */

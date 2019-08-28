@@ -1,5 +1,5 @@
 // Tutaj dodacie zmienne globalne do przechowywania elementów takich jak np. lista czy input do wpisywania nowego todo
-let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form;
+let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form, $addTodoBtn, $myInput;
 const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 
 function main() {
@@ -17,12 +17,15 @@ function prepareDOMElements() {
   $buttonOk = document.querySelector('#btn__done');
   $addedInput = document.querySelector('#popupInput');
   $form = document.querySelector('form');
+  $addTodoBtn = document.querySelector('#addTodo');
+  $myInput = document.querySelector('#myInput');
+
 }
 
-function prepareDOMEvents()
-  // Przygotowanie listenerów
+function prepareDOMEvents() {
   $list.addEventListener('click', listClickManager);
-  
+  $list.addEventListener('click', 'addNewTodoToList');
+
   $buttonForm.addEventListener('click', function () {
     $modal.classList.toggle('modal--show');
   });
@@ -62,6 +65,10 @@ function addNewElementToList(title   /* Title, author, id */) {
   // $list.appendChild(createElement('nowy', 2))
   const newElement = createElement(title);
   $list.appendChild(newElement);
+  if ($myInput.value.trim()){
+    addNewElementToList($muInput.value);
+    $myInput.value = '';
+  }
 }
 
 function createElement(title /* Title, author, id */) {
@@ -70,6 +77,15 @@ function createElement(title /* Title, author, id */) {
   const newElement = document.createElement('li');
   newElement.innerText = title;
 
+  const titleElement = document.createElement('span');//w jednym divie buttony
+  titleElement.innerText = title;
+
+  const delButton = document.createElement('button');
+  delButton.innerText = 'delete';
+  delButton.className = 'btn-delete';
+
+  newElement.appendChild(titleElement);
+  newElement.appendChild(delButton);
   return newElement;
 }
 
