@@ -17,30 +17,30 @@ function prepareDOMElements() {
   $buttonOk = document.querySelector('#btn__done');
   $addedInput = document.querySelector('#popupInput');
   $form = document.querySelector('form');
-  $addTodoBtn = document.getElementById('#addTodo');
-  $myInput = document.getElementById('#myInput');
+  $addTodoBtn = document.getElementById('addTodo');
+  $myInput = document.getElementById('myInput');
   $popupInput = document.getElementById('popupInput');
 
 }
 
 function prepareDOMEvents() {
   $list.addEventListener('click', listClickManager);
-  $addTodoBtn.addEventListener('click', 'addNewTodoToList');
-  $list.addEventListener('click', 'addNewTodoToList');
+  $addTodoBtn.addEventListener('click', addNewTodoToList);
+  $list.addEventListener('click', addNewTodoToList);
 
   $buttonForm.addEventListener('click', function () {
-    $modal.classList.toggle('modal--show');
+    $modal.classList.toggle('.modal--show');
   });
   
   $buttonCancel.addEventListener('click', function () {
-    $modal.classList.remove('modal--show');
+    $modal.classList.remove('.modal--show');
   });
  
   $form.addEventListener('submit', function(e) {
   e.preventDefault();
   if($addedInput.value.trim() !== '') {
   $list.querySelector('li').innerHTML = $addedInput.value;
-  $modal.classList.remove('modal--show');
+  $modal.classList.remove('.modal--show');
   } else {
     $addedInput.style.color = 'red';
   }
@@ -84,7 +84,7 @@ function createElement(title /* Title, author, id */) {
 
 function addNewTodoToList() {
   if ($myInput.value.trim()){
-    addNewElementToList($muInput.value);
+    addNewElementToList($myInput.value);
     $myInput.value = '';
   }
 }
