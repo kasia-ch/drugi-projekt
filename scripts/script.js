@@ -1,5 +1,5 @@
 // Tutaj dodacie zmienne globalne do przechowywania elementów takich jak np. lista czy input do wpisywania nowego todo
-let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form, $addTodoBtn, $myInput;
+let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form, $addTodoBtn, $myInput, lastId = 0, $popupInput;
 const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 
 function main() {
@@ -17,13 +17,15 @@ function prepareDOMElements() {
   $buttonOk = document.querySelector('#btn__done');
   $addedInput = document.querySelector('#popupInput');
   $form = document.querySelector('form');
-  $addTodoBtn = document.querySelector('#addTodo');
-  $myInput = document.querySelector('#myInput');
+  $addTodoBtn = document.getElementById('#addTodo');
+  $myInput = document.getElementById('#myInput');
+  $popupInput = document.getElementById('popupInput');
 
 }
 
 function prepareDOMEvents() {
   $list.addEventListener('click', listClickManager);
+  $addTodoBtn.addEventListener('click', 'addNewTodoToList');
   $list.addEventListener('click', 'addNewTodoToList');
 
   $buttonForm.addEventListener('click', function () {
@@ -33,13 +35,6 @@ function prepareDOMEvents() {
   $buttonCancel.addEventListener('click', function () {
     $modal.classList.remove('modal--show');
   });
- 
-  //$addedInput.addEventListener('keyup', function (e) {
-    //if (e.keyCode === 13) {
-      //$list.querySelector('li').innerHTML = $addedInput.value;
-      //$modal.classList.remove('modal--show');
-    //}
-  //});
  
   $form.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -65,17 +60,15 @@ function addNewElementToList(title   /* Title, author, id */) {
   // $list.appendChild(createElement('nowy', 2))
   const newElement = createElement(title);
   $list.appendChild(newElement);
-  if ($myInput.value.trim()){
-    addNewElementToList($muInput.value);
-    $myInput.value = '';
-  }
+  
 }
 
 function createElement(title /* Title, author, id */) {
   // Tworzyc reprezentacje DOM elementu return newElement
   // return newElement
   const newElement = document.createElement('li');
-  newElement.innerText = title;
+  lastId += 1;
+  newElement.id = 'todo-' + lastId;
 
   const titleElement = document.createElement('span');//w jednym divie buttony
   titleElement.innerText = title;
@@ -89,19 +82,38 @@ function createElement(title /* Title, author, id */) {
   return newElement;
 }
 
-function listClickManager(/* event- event.target */) {
+function addNewTodoToList() {
+  if ($myInput.value.trim()){
+    addNewElementToList($muInput.value);
+    $myInput.value = '';
+  }
+}
+
+function listClickManager(event) {
   // Rozstrzygnięcie co dokładnie zostało kliknięte i wywołanie odpowiedniej funkcji
   // event.target.parentElement.id
-  // if (event.target.className === 'edit') { editListElement(id) }
+  let id = event.target.parentElement.id;
+
+  if (event.target.className === 'btn-delete') { 
+    removeListElement(id);
+  } else if (event.target.className === 'btn-edit') {
+    let title = document.querySelector('#' + id).querySelector('span').innerText;
+    editListElement(id, title);
+  } else if (event.target.className === 'btn-done') { //można else if ostatnie pominąć
+
+  }
 }
 
-function removeListElement(/* id */) {
-  // Usuwanie elementu z listy
+function removeListElement(id) {
+  let liElement = document.querySelector('#' + id);
+  $list.removeChild(liElement);
 }
 
-function editListElement(/* id */) {
+function editListElement(id, title) {
   // Pobranie informacji na temat zadania
   // Umieść dane w popupie
+  openPopup();
+  $popupInput.value = title;
 }
 
 function addDataToPopup(/* Title, author, id */) {
