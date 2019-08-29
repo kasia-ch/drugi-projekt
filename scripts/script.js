@@ -45,6 +45,8 @@ function prepareDOMEvents() {
     $addedInput.style.color = 'red';
   }
  });
+
+
 }
 
 
@@ -81,20 +83,20 @@ function createElement(title /* Title, author, id */) {
   newElement.appendChild(delButton);
 
   const editButton = document.createElement('button');
-  editButton.innerTest = 'edit';
-  editButtton.className = 'btn-edit';
+  editButton.innerText = 'edit';
+  editButton.className = 'btn-edit';
 
   newElement.appendChild(titleElement);
   newElement.appendChild(editButton);
 
 
   const doneButton = document.createElement('button');
-  doneButton.innerTest = 'done';
-  doneButtton.className = 'btn-done';
+  doneButton.innerText = 'done';
+  doneButton.className = 'btn-done';
 
   newElement.appendChild(titleElement);
   newElement.appendChild(doneButton);
-  
+
   return newElement;
 
 }
@@ -131,6 +133,9 @@ function editListElement(id, title) {
   // Umieść dane w popupie
   openPopup();
   $popupInput.value = title;
+
+  let liElement = document.querySelector('#' + id);
+  $list.editListElement(liElement);
 }
 
 function addDataToPopup(/* Title, author, id */) {
