@@ -29,7 +29,7 @@ function prepareDOMEvents() {
   $list.addEventListener('click', addNewTodoToList);
 
   $buttonForm.addEventListener('click', function () {
-    $modal.classList.toggle('modal--show');
+    //$modal.classList.toggle('modal--show');
   });
   
   $buttonCancel.addEventListener('click', function () {
