@@ -79,7 +79,24 @@ function createElement(title /* Title, author, id */) {
 
   newElement.appendChild(titleElement);
   newElement.appendChild(delButton);
+
+  const editButton = document.createElement('button');
+  editButton.innerTest = 'edit';
+  editButtton.className = 'btn-edit';
+
+  newElement.appendChild(titleElement);
+  newElement.appendChild(editButton);
+
+
+  const doneButton = document.createElement('button');
+  doneButton.innerTest = 'done';
+  doneButtton.className = 'btn-done';
+
+  newElement.appendChild(titleElement);
+  newElement.appendChild(doneButton);
+  
   return newElement;
+
 }
 
 function addNewTodoToList() {
