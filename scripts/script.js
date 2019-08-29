@@ -21,7 +21,7 @@ function prepareDOMElements() {
   $myInput = document.getElementById('myInput');
   $popupInput = document.getElementById('popupInput');
   $modal = document.querySelector('#myModal');
-  $buttonEdit = document.querySelector('#btn_edit');
+  $editButton = document.querySelector('#btn_edit');
 }
 
 function prepareDOMEvents() {
@@ -122,11 +122,11 @@ function listClickManager(event) {
   } else if (event.target.className === 'btn-done') { //można else if ostatnie pominąć
   }
 
-  //if(event.target.className === 'btn-edit') {
-    $buttonEdit.addEventListener('click', function (){
+  if(event.target.className === 'btn-edit') {
+    $editButton.addEventListener('click', function (){
       $modal.classList.toggle('modal--show');
     });    
-  //}
+  }
 }
 
 function removeListElement(id) {
