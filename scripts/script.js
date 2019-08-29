@@ -20,7 +20,7 @@ function prepareDOMElements() {
   $addTodoBtn = document.getElementById('addTodo');
   $myInput = document.getElementById('myInput');
   $popupInput = document.getElementById('popupInput');
-
+  $modal = document.querySelector('#myModal');
 }
 
 function prepareDOMEvents() {
@@ -29,18 +29,18 @@ function prepareDOMEvents() {
   $list.addEventListener('click', addNewTodoToList);
 
   $buttonForm.addEventListener('click', function () {
-    $modal.classList.toggle('.modal--show');
+    $modal.classList.toggle('modal--show');
   });
   
   $buttonCancel.addEventListener('click', function () {
-    $modal.classList.remove('.modal--show');
+    $modal.classList.remove('modal--show');
   });
  
   $form.addEventListener('submit', function(e) {
   e.preventDefault();
   if($addedInput.value.trim() !== '') {
   $list.querySelector('li').innerHTML = $addedInput.value;
-  $modal.classList.remove('.modal--show');
+  $modal.classList.remove('modal--show');
   } else {
     $addedInput.style.color = 'red';
   }
