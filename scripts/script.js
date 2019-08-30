@@ -39,7 +39,7 @@ function prepareDOMEvents() {
   $form.addEventListener('submit', function(e) {
   e.preventDefault();
   if($addedInput.value.trim() !== '') {
-  $list.querySelector('li').innerHTML = $addedInput.value;
+  $list.querySelector('li').innerHTML = $addedInput.value; //do poprawki, zeby nie był nadpisywany cały HTML samą zawartością inputa
   $modal.classList.remove('modal--show');
   } else {
     $addedInput.style.color = 'red';
@@ -66,18 +66,16 @@ function addNewElementToList(title   /* Title, author, id */) {
 }
 
 function createElement(title) {
-  // Tworzyc reprezentacje DOM elementu return newElement
-  // return newElement
+  let div1 = document.createElement('div');
+
   const newElement = document.createElement('li');
   lastId += 1;
   newElement.id = 'todo-' + lastId;
 
+  let div2 = document.createElement('div');
   const titleElement = document.createElement('span');//w jednym divie buttony
   titleElement.innerText = title;
 
-  const delButton = document.createElement('button');
-  delButton.innerText = 'delete';
-  delButton.className = 'btn-delete';
 
   const editButton = document.createElement('button');
   editButton.innerText = 'edit';
@@ -87,10 +85,15 @@ function createElement(title) {
   doneButton.innerText = 'done';
   doneButton.className = 'btn-done';
 
+  const delButton = document.createElement('button');
+  delButton.innerText = 'delete';
+  delButton.className = 'btn-delete';
+
   newElement.appendChild(titleElement);
+  newElement.appendChild(editButton);
   newElement.appendChild(doneButton);
   newElement.appendChild(delButton);
-  newElement.appendChild(editButton);
+
   
   return newElement;
 
