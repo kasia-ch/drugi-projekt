@@ -27,7 +27,6 @@ function prepareDOMElements() {
 function prepareDOMEvents() {
   $list.addEventListener('click', listClickManager);
   $addTodoBtn.addEventListener('click', addNewTodoToList);
-  $list.addEventListener('click', addNewTodoToList);
 
   $buttonForm.addEventListener('click', function () {
     //$modal.classList.toggle('modal--show');
@@ -123,9 +122,7 @@ function listClickManager(event) {
   }
 
   if(event.target.className === 'btn-edit') {
-    $editButton.addEventListener('click', function (){
-      $modal.classList.toggle('modal--show');
-    });    
+      $modal.classList.toggle('modal--show');  
   }
 }
 
