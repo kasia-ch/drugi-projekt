@@ -65,7 +65,7 @@ function addNewElementToList(title   /* Title, author, id */) {
   
 }
 
-function createElement(title /* Title, author, id */) {
+function createElement(title) {
   // Tworzyc reprezentacje DOM elementu return newElement
   // return newElement
   const newElement = document.createElement('li');
@@ -79,16 +79,9 @@ function createElement(title /* Title, author, id */) {
   delButton.innerText = 'delete';
   delButton.className = 'btn-delete';
 
-  newElement.appendChild(titleElement);
-  newElement.appendChild(delButton);
-
   const editButton = document.createElement('button');
   editButton.innerText = 'edit';
   editButton.className = 'btn-edit';
-
-  newElement.appendChild(titleElement);
-  newElement.appendChild(editButton);
-
 
   const doneButton = document.createElement('button');
   doneButton.innerText = 'done';
@@ -96,7 +89,9 @@ function createElement(title /* Title, author, id */) {
 
   newElement.appendChild(titleElement);
   newElement.appendChild(doneButton);
-
+  newElement.appendChild(delButton);
+  newElement.appendChild(editButton);
+  
   return newElement;
 
 }
