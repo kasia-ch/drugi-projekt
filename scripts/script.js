@@ -39,7 +39,7 @@ function prepareDOMEvents() {
   $form.addEventListener('submit', function(e) {
   e.preventDefault();
   if($addedInput.value.trim() !== '') {
-  $list.querySelector('li').innerHTML = $addedInput.value; //do poprawki, zeby nie był nadpisywany cały HTML samą zawartością inputa
+  $list.querySelector('li').querySelector('span').innerHTML = $addedInput.value;
   $modal.classList.remove('modal--show');
   } else {
     $addedInput.style.color = 'red';

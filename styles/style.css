@@ -27,6 +27,9 @@ body {
     font-size: 40px;
   }
 
+  ul li:nth-child(odd) {
+    background: #f9f9f9cb;
+  }
   /* Remove margins and padding from the list */
   ul {
     margin: 0;
