@@ -118,6 +118,7 @@ function listClickManager(event) {
     currentId = id;
     let title = document.querySelector('#' + id).querySelector('span').innerText;
     editListElement(id, title);
+    
   } else if (event.target.className === 'btn-done') {
     event.target.parentElement.classList.toggle('done');
  }
@@ -156,8 +157,13 @@ function openPopup() {
   // Otwórz popup
 }
 
-function closePopup() {
-  // Zamknij popup
+function closePopup(event) {
+  //let id = event.target.parentElement.id;
+  if (event.target.className === 'close') {
+    closePopup = id;
+    event.target.parentElement.classList.toggle('close');
+  }
+
 }
 
 function declineChanges() { //niepotrzebna raczej
