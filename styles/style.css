@@ -41,18 +41,9 @@ body {
     border-bottom: 1px solid rgba(144, 144, 146, 0.418);
   }
 
-  ul li.checked::before {
-    content: '';
-    position: absolute;
-    border-color: #fff;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
-  }
+ .done {
+    text-decoration: line-through;
+ }
   
   
   /* The Modal (background) */
