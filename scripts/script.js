@@ -1,5 +1,5 @@
 // Tutaj dodacie zmienne globalne do przechowywania elementów takich jak np. lista czy input do wpisywania nowego todo
-let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form, $addTodoBtn, $myInput, lastId = 0, $popupInput, $buttonEdit;
+let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form, $addTodoBtn, $myInput, lastId = 0, $popupInput, $editButton, currentId, $doneButton;
 const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 
 function main() {
@@ -22,6 +22,7 @@ function prepareDOMElements() {
   $popupInput = document.getElementById('popupInput');
   $modal = document.querySelector('#myModal');
   $editButton = document.querySelector('#btn_edit');
+  $doneButton = document.querySelector('#btn_done');
 }
 
 function prepareDOMEvents() {
@@ -114,10 +115,17 @@ function listClickManager(event) {
   if (event.target.className === 'btn-delete') { 
     removeListElement(id);
   } else if (event.target.className === 'btn-edit') {
+    currentId = id;
     let title = document.querySelector('#' + id).querySelector('span').innerText;
     editListElement(id, title);
   } else if (event.target.className === 'btn-done') { //można else if ostatnie pominąć
+  // Add a "checked" symbol when clicking on a list item
+    let list = document.querySelector('ul');
+    list.addEventListener('click', function(e) {
+    if (e.target.tagName === 'LI') {
+    e.target.classList.toggle('btn-done');
   }
+}, false);}
 
   if(event.target.className === 'btn-edit') {
       $modal.classList.toggle('modal--show');  
