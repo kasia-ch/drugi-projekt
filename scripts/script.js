@@ -10,6 +10,7 @@ function main() {
 }
 
 function getListFromServer () {
+  $list.innerHTML = '';
   axios.get('http://195.181.210.249:3000/todo/')
     .then(function (response) {
       if (response.status === 200) {
