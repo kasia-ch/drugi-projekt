@@ -8,6 +8,7 @@ function main() {
   //prepareInitialList();
   getListFromServer();
 }
+
 function getListFromServer () {
   axios.get('http://195.181.210.249:3000/todo/')
     .then(function (response) {
@@ -125,14 +126,14 @@ function addNewTodoToList() {
 function listClickManager(event) {
   // Rozstrzygnięcie co dokładnie zostało kliknięte i wywołanie odpowiedniej funkcji
   // event.target.parentElement.id
-  let id = event.target.parentElement.id;
-
+  let id = event.target.parentElement.dataset.id;
+ 
   if (event.target.className === 'btn-delete') { 
     let dataID = event.target.parentElement.dataset.id;
     removeListElement(id);
   } else if (event.target.className === 'btn-edit') {
     currentId = id;
-    console.log('li[data-id="' + id + '"]');
+  
     let title = document.querySelector('li[data-id="' + id + '"]').querySelector('span').innerText;
     editListElement(id, title);
   
