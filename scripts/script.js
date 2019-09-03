@@ -5,8 +5,19 @@ const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 function main() {
   prepareDOMElements();
   prepareDOMEvents();
-  prepareInitialList();
+  //prepareInitialList();
+  getListFromServer();
 }
+function getListFromServer () {
+  axios.get('http://195.181.210.249:3000/todo/')
+    .then(function (response) {
+      if (response.status === 200) {
+        response.data.forEach(todo => {
+          addNewElementToList(todo.title, todo.id);
+        });
+      }
+    });
+  }
 
 function prepareDOMElements() {
   // To będzie idealne miejsce do pobrania naszych elementów z drzewa DOM i zapisanie ich w zmiennych
@@ -63,21 +74,20 @@ function prepareInitialList() {
   });
 }
 
-function addNewElementToList(title   /* Title, author, id */) {
+function addNewElementToList(title, id) {
   //obsługa dodawanie elementów do listy
   // $list.appendChild(createElement('nowy', 2))
-  const newElement = createElement(title);
+  const newElement = createElement(title, id);
   $list.appendChild(newElement);
   
 }
 
-function createElement(title) {
+function createElement(title, id) {
   let div1 = document.createElement('div');
 
   const newElement = document.createElement('li');
-  lastId += 1;
-  newElement.id = 'todo-' + lastId;
-
+  //lastId += 1;
+  newElement.setAttribute('data-id', id);
   let div2 = document.createElement('div');
   const titleElement = document.createElement('span');//w jednym divie buttony
   titleElement.innerText = title;
@@ -118,10 +128,11 @@ function listClickManager(event) {
   let id = event.target.parentElement.id;
 
   if (event.target.className === 'btn-delete') { 
+    let dataID = event.target.parentElement.dataset.id;
     removeListElement(id);
   } else if (event.target.className === 'btn-edit') {
     currentId = id;
-    let title = document.querySelector('#' + id).querySelector('span').innerText;
+    let title = document.querySelector('li[data-id="' + id + '"]').querySelector('span').innerText;
     editListElement(id, title);
     
   } else if (event.target.className === 'btn-done') {
@@ -134,8 +145,8 @@ function listClickManager(event) {
 }
 
 function removeListElement(id) {
-  let liElement = document.querySelector('#' + id);
-  $list.removeChild(liElement);
+  let liElement = document.querySelector('li[data-id="' + id + '"]');
+  //$list.removeChild(liElement);
 }
 
 function editListElement(id, title) {
