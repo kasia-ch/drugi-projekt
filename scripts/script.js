@@ -37,6 +37,10 @@ function prepareDOMEvents() {
   $buttonCancel.addEventListener('click', function () {
     $modal.classList.remove('modal--show');
   });
+
+  $closePopup.addEventListener('click', function () {
+    $modal.classList.remove('modal--show');
+  });
  
   $form.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -158,12 +162,9 @@ function openPopup() {
   // Otwórz popup
 }
 
-function closePopup(event) {
+function closePopup() {
   //let id = event.target.parentElement.id;
-  if (event.target.className === 'closePopup') {
-    closePopup = id;
-    event.target.parentElement.classList.toggle('close');
-  }
+
 
 }
 
