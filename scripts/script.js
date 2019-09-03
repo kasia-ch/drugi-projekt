@@ -132,8 +132,10 @@ function listClickManager(event) {
     removeListElement(id);
   } else if (event.target.className === 'btn-edit') {
     currentId = id;
+    console.log('li[data-id="' + id + '"]');
     let title = document.querySelector('li[data-id="' + id + '"]').querySelector('span').innerText;
     editListElement(id, title);
+  
     
   } else if (event.target.className === 'btn-done') {
     event.target.parentElement.classList.toggle('done');
@@ -145,7 +147,14 @@ function listClickManager(event) {
 }
 
 function removeListElement(id) {
-  let liElement = document.querySelector('li[data-id="' + id + '"]');
+  //let liElement = document.querySelector('li[data-id="' + id + '"]');
+ 
+  axios.delete('http://195.181.210.249:3000/todo/' + id).then((response) => {
+    if (response.data.status === 0) {
+      getListFromServer();
+    }
+  });
+ 
   //$list.removeChild(liElement);
 }
 
