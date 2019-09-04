@@ -1,5 +1,5 @@
 // Tutaj dodacie zmienne globalne do przechowywania elementów takich jak np. lista czy input do wpisywania nowego todo
-let $list, $modal, $buttonForm, $buttonCancel, $buttonOk, $addedInput, $form, $addTodoBtn, $myInput, lastId = 0, $popupInput, $editButtom, currentId, $doneButton, $closePopup;
+let $list, $modal, $buttonCancel, $buttonOk, $form, $myInput, lastId = 0, $popupInput, $editButton, currentId, $doneButton, $closePopup;
 const initialList = ['Dzisiaj robię usuwanie', 'Nakarm psa'];
 
 function main() {
@@ -25,12 +25,9 @@ function prepareDOMElements() {
   // To będzie idealne miejsce do pobrania naszych elementów z drzewa DOM i zapisanie ich w zmiennych
   $list = document.getElementById('list');
   $modal = document.querySelector('#modal');
-  $buttonForm = document.querySelector('#addTodo');
   $buttonCancel = document.querySelector('#btn__cancel');
   $buttonOk = document.querySelector('#btn__done');
-  $addedInput = document.querySelector('#popupInput');
-  $form = document.querySelector('form');
-  $addTodoBtn = document.getElementById('addTodo');
+  $form = document.querySelector('#addForm');
   $myInput = document.getElementById('myInput');
   $popupInput = document.getElementById('popupInput');
   $modal = document.querySelector('#myModal');
@@ -41,31 +38,27 @@ function prepareDOMElements() {
 
 function prepareDOMEvents() {
   $list.addEventListener('click', listClickManager);
-  $addTodoBtn.addEventListener('click', addNewTodoToList);
 
-  $buttonForm.addEventListener('click', function () {
-    //$modal.classList.toggle('modal--show');
-  });
-  
   $buttonCancel.addEventListener('click', function () {
-    $modal.classList.remove('modal--show');
+    closePopup();
   });
 
   $closePopup.addEventListener('click', function () {
-    $modal.classList.remove('modal--show');
+    closePopup();
+  });
+
+   $buttonOk.addEventListener('click', function () {
+    acceptChangeHandler();
   });
  
   $form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  if($addedInput.value.trim() !== '') {
-  $list.querySelector('li').querySelector('span').innerHTML = $addedInput.value;
-  $modal.classList.remove('modal--show');
-  } else {
-    $addedInput.style.color = 'red';
-  }
+    e.preventDefault(); {
+      if ($myInput.value.trim() !=='') {
+        //addNewTodoToList();
+        sendToDoToServer();
+      }
+    } 
  });
-
-
 }
 
 
@@ -118,11 +111,10 @@ function createElement(title, id) {
 }
 
 function addNewTodoToList() {
-  if ($myInput.value.trim()){
-    addNewElementToList($myInput.value);
-    $myInput.value = '';
-  }
+  addNewElementToList($myInput.value);
+  $myInput.value = '';
 }
+
 
 function listClickManager(event) {
   // Rozstrzygnięcie co dokładnie zostało kliknięte i wywołanie odpowiedniej funkcji
@@ -143,9 +135,6 @@ function listClickManager(event) {
     event.target.parentElement.classList.toggle('done');
  }
 
-  if(event.target.className === 'btn-edit') {
-      $modal.classList.toggle('modal--show');  
-  }
 }
 
 function removeListElement(id) {
@@ -175,19 +164,37 @@ function addDataToPopup(/* Title, author, id */) {
 }
 
 function acceptChangeHandler() {
-  // pobierz dane na temat zadania z popupu (id, nowyTitle, nowyColor ...)
-  // Następnie zmodyfikuj element listy wrzucając w niego nowyTitle, nowyColor...
-  // closePopup()
+  axios.put('http://195.181.210.249:3000/todo/' + currentId, {
+    title: $popupInput.value
+  }).then((response) => {
+    if (response.data.status === 0) {
+      getListFromServer();
+      closePopup();
+    }
+  })
+}
+
+function sendToDoToServer() {
+  axios.post('http://195.181.210.249:3000/todo/' + currentId, {
+    title: $popupInput.value
+  }).then((response) => {
+    if (response.data.status === 0) {
+      sendToDoToServer();
+      closePopup();
+    }
+  })
 }
 
 function openPopup() {
   // Otwórz popup
+
+    $modal.classList.add('modal--show');  
+
 }
 
 function closePopup() {
   //let id = event.target.parentElement.id;
-
-
+  $modal.classList.remove('modal--show');
 }
 
 function declineChanges() { //niepotrzebna raczej
