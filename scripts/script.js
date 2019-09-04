@@ -55,7 +55,7 @@ function prepareDOMEvents() {
     e.preventDefault(); {
       if ($myInput.value.trim() !=='') {
         //addNewTodoToList();
-        sendToDoToServer();
+        sendTodoToServer();
       }
     } 
  });
@@ -174,15 +174,10 @@ function acceptChangeHandler() {
   })
 }
 
-function sendToDoToServer() {
-  axios.post('http://195.181.210.249:3000/todo/' + currentId, {
-    title: $popupInput.value
-  }).then((response) => {
-    if (response.data.status === 0) {
-      sendToDoToServer();
-      closePopup();
-    }
-  })
+function sendTodoToServer() {
+axios.post('http://195.181.210.249:3000/todo/', {title: $myInput.value}).then((response) => {
+    sendTodoToServer();
+  });
 }
 
 function openPopup() {
