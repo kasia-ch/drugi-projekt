@@ -176,7 +176,7 @@ function acceptChangeHandler() {
 
 function sendTodoToServer() {
 axios.post('http://195.181.210.249:3000/todo/', {title: $myInput.value}).then((response) => {
-    
+  getListFromServer()
   });
 }
 
