@@ -55,8 +55,7 @@ function prepareDOMEvents() {
         sendTodoToServer();
       }
     } 
- });
-}
+  });
 
 
 function prepareInitialList() {
