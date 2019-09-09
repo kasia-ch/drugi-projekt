@@ -46,9 +46,8 @@ function prepareDOMEvents() {
 
    $buttonOk.addEventListener('click', function () {
     acceptChangeHandler();
-});
-}
- 
+  });
+
   $form.addEventListener('submit', function(e) {
     e.preventDefault(); {
       if ($myInput.value.trim() !=='') {
@@ -56,6 +55,7 @@ function prepareDOMEvents() {
       }
     } 
   });
+}
 
 
 function prepareInitialList() {
@@ -70,11 +70,11 @@ function addNewElementToList(title, id) {
 }
 
 function createElement(title, id) {
-  let div1 = document.createElement('div');
+  let buttonWrapper = document.createElement('div');
 
   const newElement = document.createElement('li');
   newElement.setAttribute('data-id', id);
-  let div2 = document.createElement('div');
+ 
   const titleElement = document.createElement('span');
   titleElement.innerText = title;
 
@@ -92,9 +92,10 @@ function createElement(title, id) {
   delButton.className = 'btn-delete';
 
   newElement.appendChild(titleElement);
-  newElement.appendChild(editButton);
-  newElement.appendChild(doneButton);
-  newElement.appendChild(delButton);
+  buttonWrapper.appendChild(editButton);
+  buttonWrapper.appendChild(doneButton);
+  buttonWrapper.appendChild(delButton);
+  newElement.appendChild(buttonWrapper);
   
   return newElement;
 }
@@ -105,10 +106,10 @@ function addNewTodoToList() {
 }
 
 function listClickManager(event) {
-  let id = event.target.parentElement.dataset.id;
+  let id = event.target.parentElement.parentElement.dataset.id;
  
   if (event.target.className === 'btn-delete') { 
-    let dataID = event.target.parentElement.dataset.id;
+    let dataID = event.target.parentElement.parentElement.dataset.id;
     removeListElement(id);
   } else if (event.target.className === 'btn-edit') {
     currentId = id;
@@ -117,9 +118,8 @@ function listClickManager(event) {
     editListElement(id, title);
   
   } else if (event.target.className === 'btn-done') {
-    event.target.parentElement.classList.toggle('done');
+    event.target.parentElement.parentElement.classList.toggle('done');
  }
-
 }
 
 function removeListElement(id) {
