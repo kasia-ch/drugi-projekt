@@ -109,7 +109,6 @@ function listClickManager(event) {
   let id = event.target.parentElement.parentElement.dataset.id;
  
   if (event.target.className === 'btn-delete') { 
-    let dataID = event.target.parentElement.parentElement.dataset.id;
     removeListElement(id);
   } else if (event.target.className === 'btn-edit') {
     currentId = id;
