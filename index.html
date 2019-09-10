@@ -8,28 +8,30 @@
     <title>Todo list</title>
   </head>
   <body>
-    <form action = "#"  id="addForm" class="header">
-      <h2>My ToDo List</h2>
-      <input type="text" id="myInput" placeholder="Add item to do">
-      <button id="addTodo" class="addBtn">Add</button>
-    </form>
-      
-    <ul id="list">
-    </ul>
-
-    <div id="myModal" class="modal">
-
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span id="closePopup" class="close">&times;</span>
-        <div>
-          <input type="text" id="popupInput" placeholder="Type your task">
-          <button id="btn__cancel" class="addBtn" type="reset">CANCEL</button>
-          <button id="btn__done" class="addBtn">OK</button>
+    <div id="container">
+      <form action = "#"  id="addForm" class="header">
+        <h2>My ToDo List</h2>
+        <input type="text" id="myInput" placeholder="Insert item name">
+        <button id="addTodo" class="addBtn">Add</button>
+      </form>
+        
+      <ul id="list">
+      </ul>
+  
+      <div id="myModal" class="modal">
+  
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span id="closePopup" class="close">&times;</span>
+          <div>
+            <input type="text" id="popupInput" placeholder="Type your task">
+            <button id="btn__cancel" class="addBtn" type="reset">CANCEL</button>
+            <button id="btn__done" class="addBtn">OK</button>
+          </div>
         </div>
       </div>
-
     </div>
+    
     <script src="scripts/script.js"></script>
   </body>
 </html>

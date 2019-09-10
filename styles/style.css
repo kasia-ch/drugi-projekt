@@ -15,21 +15,19 @@ body {
   }
 
   h2 {
-    font-size: 60px;
+    font-size: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  #myInput {
-    width: 90%;
-  }
-
-  .addBtn {
-    cursor: pointer;
-  }
 
   #myInput, #addTodo {
-    font-size: 40px;
+    width: 100%;
+    font-size: 30px;
+  }
+
+  #addTodo {
+    border: 1px solid  #aaaaaa;
   }
 
   /*ul li:nth-child(odd) {
@@ -81,7 +79,7 @@ body {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid  #aaaaaa;
     width: 80%;
   }
   
@@ -91,6 +89,9 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .close:hover,
@@ -99,14 +100,43 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
+
+  .btn-edit, .btn-done, .btn-delete {
+    border: 1px solid  #aaaaaa;
+    
+  }
   
   @media screen and (min-width: 768px){
     .container {
         width: 720px;
     }
 
+    #myInput {
+      width: 100%;
+    }
+  
+    .addBtn, .btn-edit, .btn-done, .btn-delete{
+      cursor: pointer;
+    }
+  
+    #myInput, #addTodo {
+      font-size: 30px;
+    }
+
   @media screen and (min-width: 1024px){
     .container {
         width: 960px;
+    }
+
+    #myInput {
+      width: 100%;
+    }
+  
+    .addBtn, .btn-edit, .btn-done, .btn-delete{
+      cursor: pointer;
+    }
+  
+    #myInput, #addTodo {
+      font-size: 30px;
     }
   
