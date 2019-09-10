@@ -68,6 +68,7 @@ function addNewElementToList(title, id) {
   const newElement = createElement(title, id);
   $list.appendChild(newElement);
 }
+// zmiana test
 
 function createElement(title, id) {
   let buttonWrapper = document.createElement('div');
